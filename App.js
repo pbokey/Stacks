@@ -11,10 +11,21 @@ import {
   Text,
   View
 } from 'react-native';
+import * as firebase from 'firebase';
+const firebaseConfig = {
+    apiKey: "AIzaSyCCzhkQsZBQfep8NSb9xfjyHRyaEkYJ0nI",
+    authDomain: "stacks-94005.firebaseapp.com",
+    databaseURL: "https://stacks-94005.firebaseio.com",
+    projectId: "stacks-94005",
+    storageBucket: "",
+    messagingSenderId: "400552345256"
+  };
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
+    'Cmd+D' + firebaseApp.databaseURL() +  ' or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
