@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+
 
 import React, { Component } from 'react';
 import {
@@ -17,7 +13,6 @@ import {
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title } from 'native-base';
 import firebaseApp from './firebase';
 import styles from './Themes/MyTheme';
-const util = require('util');
 
 
 export default class LoginScreen extends Component<{}> {
@@ -54,14 +49,14 @@ export default class LoginScreen extends Component<{}> {
         />
           <Form>
             <Item floatingLabel>
-              <Label>Username</Label>
+              <Label>email</Label>
               <Input
                 onChangeText={(text) => this.setState({email:text})}
                 autoCapitalize = 'none'
               />
             </Item>
             <Item floatingLabel last>
-              <Label>Password</Label>
+              <Label>password</Label>
               <Input
                 onChangeText={(text) => this.setState({password:text})}
                 autoCapitalize = 'none'
