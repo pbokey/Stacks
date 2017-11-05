@@ -9,7 +9,7 @@ import ResetPasswordScreen from './src/ResetPasswordScreen';
 import MainScreen from './src/MainPage';
 
 const App = StackNavigator({
-  Home: { screen: ResetPasswordScreen },
+  Home: { screen: HomeScreen },
   Register: { screen: RegisterScreen },
   Login: { screen: LoginScreen },
   Main: { screen: MainScreen }
