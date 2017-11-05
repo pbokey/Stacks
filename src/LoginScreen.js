@@ -13,6 +13,7 @@ import {
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title } from 'native-base';
 import firebaseApp from './firebase';
 import styles from './Themes/MyTheme';
+import MainScreen from './MainPage';
 
 
 export default class LoginScreen extends Component<{}> {
@@ -20,8 +21,8 @@ export default class LoginScreen extends Component<{}> {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
+      email: 'pbokey@gatech.edu',
+      password: 'test123',
     }
   }
 
@@ -30,13 +31,23 @@ export default class LoginScreen extends Component<{}> {
   };
 
   login() {
+    if (this.state.email.length < 6 || this.state.password.length < 6) {
+      return;
+    }
+    var { navigate } = this.props.navigation;
     email = this.state.email.toLowerCase();
-    firebaseApp.auth().signInWithEmailAndPassword(email, this.state.password).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+    firebaseApp.auth().signInWithEmailAndPassword(email, this.state.password)
+      .then((user) => {
+        debugger;
+        navigate('Main')
+      }).catch(function(error) {
+          if (error === 'auth/wrong-password') {
+            Alert.alert("Wrong Password");
+          } else {
+            Alert.alert(error);
+          }
+          console.log(error);
     });
-    Alert.alert("You are logged in!");
-
   }
   render() {
     return (
