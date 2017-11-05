@@ -46,7 +46,7 @@ export default class ResetPasswordScreen extends Component<{}> {
           style={{flex: 1, height: 150, width: 150, alignSelf: 'center'}}
           resizeMode="contain"
         />
-          <Text style={{fontSize: 20, alignSelf: 'center'}}>
+          <Text style={{fontSize: 20, alignSelf: 'center', padding: '10%'}}>
             Enter the email you signed up with to get reset instructions
           </Text>
           <Form>
