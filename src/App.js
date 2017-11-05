@@ -17,10 +17,14 @@ import firebaseApp from './firebase';
 import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
+import UserInfo from './UserInfo';
+import InfoEdit from './InfoEdit';
 
 
 const App = StackNavigator({
   Home: { screen: HomeScreen },
   Register: { screen: RegisterScreen },
-  Login: { screen: LoginScreen }
+  Login: { screen: LoginScreen },
+  UserInfo: {screen: UserInfo},
+  InfoEdit: {screen: InfoEdit}
 });
