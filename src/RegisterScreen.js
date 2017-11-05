@@ -41,7 +41,6 @@ export default class RegisterScreen extends Component {
                 }).then(function() {
                     var user = firebaseApp.auth().currentUser;
                     if (user != null) {
-                      var uid = user.userID;
                       var data = {
                           "name": email.substring(0, email.indexOf('@')),
                           "payment": 0,
@@ -59,6 +58,11 @@ export default class RegisterScreen extends Component {
                     }
 
 
+                });
+                firebaseApp.auth().onAuthStateChanged(function(user) {
+                  if (!user) {
+                    firebaseApp.auth().signInWithEmailAndPassword(email, password);
+                  }
                 });
       }).catch(function(error) {
         var errorCode = error.code;
