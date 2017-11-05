@@ -23,5 +23,6 @@ import MainScreen from './MainPage';
 const App = StackNavigator({
   Home: { screen: HomeScreen },
   Register: { screen: RegisterScreen },
-  Login: { screen: LoginScreen }
+  Login: { screen: LoginScreen },
+  Main: { screen: MainScreen }
 });

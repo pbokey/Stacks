@@ -32,22 +32,24 @@ export default class LoginScreen extends Component<{}> {
 
   login() {
     if (this.state.email.length < 6 || this.state.password.length < 6) {
-      Alert.alert("Please enter a valid email and password (passowrds must be at least 7 characters)");
       return;
     }
+    var { navigate } = this.props.navigation;
     email = this.state.email.toLowerCase();
     firebaseApp.auth().signInWithEmailAndPassword(email, this.state.password)
-      .then(function(user) {
-        Alert.alert("Logged In");
-          this.props.navigator.push({
-            component: MainScreen,
-          })
+      .then((user) => {
+        debugger;
+        navigate('Main')
       }).catch(function(error) {
-          Alert.alert(error);
+          if (error === 'auth/wrong-password') {
+            Alert.alert("Wrong Password");
+          } else {
+            Alert.alert(error);
+          }
+          console.log(error);
     });
   }
   render() {
-    var { navigate } = this.props.navigation;
     return (
       <Container>
         <Content>
