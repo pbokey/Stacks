@@ -7,12 +7,19 @@ import LoginScreen from './src/LoginScreen';
 import RegisterScreen from './src/RegisterScreen';
 import MainScreen from './src/MainPage';
 
+const MainStack = StackNavigator({
+    Main: { screen: MainScreen }
+}, {
+    headerMode: 'none'
+});
 
-const App = StackNavigator({
+const Root = StackNavigator({
   Home: { screen: HomeScreen },
   Register: { screen: RegisterScreen },
   Login: { screen: LoginScreen },
   Main: { screen: MainScreen }
 });
 
-AppRegistry.registerComponent('Stacks', () => App);
+
+
+AppRegistry.registerComponent('Stacks', () => Root);
