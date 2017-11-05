@@ -21,8 +21,8 @@ export default class LoginScreen extends Component<{}> {
     super(props);
 
     this.state = {
-      email: 'pbokey@gatech.edu',
-      password: 'test123',
+      email: 'test@test.com',
+      password: 'test1234',
     }
   }
 
@@ -30,7 +30,12 @@ export default class LoginScreen extends Component<{}> {
     title: 'Login',
   };
 
-  login() {
+  async persistData(d) {
+    const response = await AsyncStorage.setItem('userid', d);
+    return reponse;
+  }
+
+  async login() {
     if (this.state.email.length < 6 || this.state.password.length < 6) {
       return;
     }
@@ -42,11 +47,13 @@ export default class LoginScreen extends Component<{}> {
     firebaseApp.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         var userID = user.toJSON().uid;
+        userID = userID.toString();
+        console.log(typeof(userID));
+        var result = this.persistData(userID);
         const resetAction = NavigationActions.reset({
           index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'Main', params : { uid: user.toJSON().uid.toString()}})]
+          actions: [NavigationActions.navigate({ routeName: 'Main' })]
         });
-        navpointer.dispatch(resetAction);
         var key = 'users/'+user.uid;
         firebaseApp.database().ref(key).once('value').then(function(userData) {
           if (userData.val() == undefined) {
@@ -62,7 +69,8 @@ export default class LoginScreen extends Component<{}> {
         }).catch(function(error) {
           Alert.alert('error: ' + error.message);
         });
-        // navigate('Main')
+        navpointer.dispatch(resetAction);
+
       }).catch(function(error) {
           if (error.code === 'auth/wrong-password') {
             Alert.alert("Wrong Password");

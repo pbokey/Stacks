@@ -18,18 +18,23 @@ export default class RegisterScreen extends Component {
       title: 'Register',
     };
 
-    register() {
+    async persistData(d) {
+      const response = await AsyncStorage.setItem('userid', d);
+      return reponse;
+    }
+
+    async register() {
       //var { navigate } = this.props.navigation;
+      var that = this;
       var navpointer = this.props.navigation;
       email = this.state.email.toLowerCase();
       password = this.state.password;
-      firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(function() {
-        Alert.alert('signing in:: rs:23');
+      firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(function(){
+        // Alert.alert('signing in:: rs:23');
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main'})]
         });
-        navpointer.dispatch(resetAction);
         firebaseApp.auth().signInWithEmailAndPassword(email , password).catch(function(error) {
                   var errorCode = error.code;
                   var errorMessage = error.message;
@@ -40,6 +45,8 @@ export default class RegisterScreen extends Component {
                   }
                 }).then(function() {
                     var user = firebaseApp.auth().currentUser;
+                    var userID = user.toJSON().uid;
+                    var result = that.persistData(userID);
                     if (user != null) {
                       var data = {
                           "name": email.substring(0, email.indexOf('@')),
@@ -56,8 +63,7 @@ export default class RegisterScreen extends Component {
                             Alert.alert('Success!');//todo: get rid of this
                           });
                     }
-
-
+                    navpointer.dispatch(resetAction);
                 });
       }).catch(function(error) {
         var errorCode = error.code;
