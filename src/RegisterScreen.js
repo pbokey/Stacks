@@ -19,9 +19,10 @@ export default class RegisterScreen extends Component {
 
     register() {
       email = this.state.email.toLowerCase();
-      firebaseApp.auth().createUserWithEmailAndPassword(email, this.state.password).then(function() {
+      password = this.state.password;
+      firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(function() {
         Alert.alert('signing in:: rs:23')
-        firebaseApp.auth().signInWithEmailAndPassword(email , this.state.password).catch(function(error) {
+        firebaseApp.auth().signInWithEmailAndPassword(email , password).catch(function(error) {
                   var errorCode = error.code;
                   var errorMessage = error.message;
                   if (errorCode === 'auth/wrong-password') {
@@ -30,7 +31,7 @@ export default class RegisterScreen extends Component {
                     alert(errorMessage);
                   }
                 }).then(function() {
-                    var user = firebase.auth().currentUser;
+                    var user = firebaseApp.auth().currentUser;
                     if (user != null) {
                       var uid = user.userID;
                       var data = {
@@ -38,8 +39,8 @@ export default class RegisterScreen extends Component {
                           "payment": 0,
                           "groupID": 0,
                       };
-                      var key = user.userID;
-                      firebase.database().ref('users/' + key).set(data).catch(
+                      var key = user.uid;
+                      firebaseApp.database().ref('users/' + key).set(data).catch(
                           function(error) {
                               Alert.alert(error.message);
                           }
@@ -54,6 +55,7 @@ export default class RegisterScreen extends Component {
       }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
+        Alert.alert('got error message: ' + errorMessage);
       });
       //Alert.alert("You are registered");
     }
