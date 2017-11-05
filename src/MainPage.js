@@ -6,10 +6,12 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title, Text } from 'native-base';
 
-var user = firebaseApp.auth().currentUser;
-console.log(user.toJSON());
 
 export default class MainScreen extends React.Component<{}> {
+  componentDidMount() {
+    const { state } = this.props.navigation;
+    var uid = state.params.uid;
+  }
   static navigationOptions = {
     title: 'Main Page',
   };
@@ -17,7 +19,7 @@ export default class MainScreen extends React.Component<{}> {
     return (
       <Container>
         <Content>
-          <Text>Home</Text>
+          <Text>uid</Text>
         </Content>
       </Container>
     );
