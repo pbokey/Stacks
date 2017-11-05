@@ -17,6 +17,7 @@ import firebaseApp from './firebase';
 import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
+import MainScreen from './MainPage';
 
 
 const App = StackNavigator({

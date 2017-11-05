@@ -8,21 +8,32 @@ import React, { Component } from 'react';
 import firebaseApp from './firebase';
 import {
   Image,
-  View
+  View,
+  Alert
 } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title, Text } from 'native-base';
-const util = require('util');
+
+var isLoggedIn = false;
+var user = firebaseApp.auth().currentUser;
+if (user) {
+  isLoggedIn = true;
+}
 
 
 export default class HomeScreen extends React.Component<{}> {
   static navigationOptions = {
     title: 'Welcome',
-  };
+  }
 
   render() {
     const { navigate }  = this.props.navigation;
     console.log(navigate);
+    Alert.alert(isLoggedIn.toString());
+    if (isLoggedIn) {
+      navigate('MainPage');
+    }
     return (
+
       <Container>
         <Content>
           <Image
