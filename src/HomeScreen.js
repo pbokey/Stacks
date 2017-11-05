@@ -13,11 +13,6 @@ import {
 } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title, Text } from 'native-base';
 
-var isLoggedIn = false;
-var user = firebaseApp.auth().currentUser;
-if (user) {
-  isLoggedIn = true;
-}
 
 
 export default class HomeScreen extends React.Component<{}> {
@@ -25,11 +20,19 @@ export default class HomeScreen extends React.Component<{}> {
     title: 'Welcome',
   }
 
+  async getData() {
+    const navpointer = this.props.navigation;
+    AsyncStorage.getItem('userid').then((token) => {
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'Main' })]
+      });
+      navpointer.dispatch(resetAction);
+    });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
-    if (isLoggedIn) {
-      navigate('MainPage');
-    }
     return (
 
       <Container>

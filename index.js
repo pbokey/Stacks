@@ -12,7 +12,9 @@ import MainScreen from './src/MainPage';
 
 
 const MainStack = StackNavigator({
-    Main: { screen: MainScreen }
+    Main: { screen: MainScreen },
+    UserInfo: {screen:UserInfo},
+    InfoEdit: {screen: InfoEdit}
 }, {
     headerMode: 'none'
 });
@@ -21,8 +23,6 @@ const Root = StackNavigator({
   Home: { screen: HomeScreen },
   Register: { screen: RegisterScreen },
   Login: { screen: LoginScreen },
-  UserInfo: {screen:UserInfo},
-  InfoEdit: {screen: InfoEdit}
   Main: { screen: MainScreen }
 });
 
