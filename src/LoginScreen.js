@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -8,7 +6,8 @@ import {
   View,
   TextInput,
   Image,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title } from 'native-base';
@@ -39,8 +38,6 @@ export default class LoginScreen extends Component<{}> {
     email = this.state.email.toLowerCase();
     firebaseApp.auth().signInWithEmailAndPassword(email, this.state.password)
       .then((user) => {
-        console.log(user.toString());
-        debugger;
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main'})]
