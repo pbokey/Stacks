@@ -10,6 +10,7 @@ import {
   Image,
   Alert
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title } from 'native-base';
 import firebaseApp from './firebase';
 import styles from './Themes/MyTheme';
@@ -38,10 +39,16 @@ export default class LoginScreen extends Component<{}> {
     email = this.state.email.toLowerCase();
     firebaseApp.auth().signInWithEmailAndPassword(email, this.state.password)
       .then((user) => {
+        console.log(user.toString());
         debugger;
-        navigate('Main')
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'Main'})]
+        });
+        this.props.navigation.dispatch(resetAction);
+        // navigate('Main')
       }).catch(function(error) {
-          if (error === 'auth/wrong-password') {
+          if (error.code === 'auth/wrong-password') {
             Alert.alert("Wrong Password");
           } else {
             Alert.alert(error);

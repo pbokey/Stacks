@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Alert} from 'react-native';
 import {Button, Container, Content, Form, Header, Input, Item, Label, Text} from 'native-base';
+import { NavigationActions } from 'react-navigation';
 import firebaseApp from './firebase';
 
 export default class RegisterScreen extends Component {
@@ -18,7 +19,9 @@ export default class RegisterScreen extends Component {
     };
 
     register() {
+      var { navigate } = this.props.navigation;
       email = this.state.email.toLowerCase();
+<<<<<<< HEAD
       password = this.state.password;
       firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(function() {
         Alert.alert('signing in:: rs:23')
@@ -58,6 +61,23 @@ export default class RegisterScreen extends Component {
         Alert.alert('got error message: ' + errorMessage);
       });
       //Alert.alert("You are registered");
+=======
+      firebaseApp.auth().createUserWithEmailAndPassword(email, this.state.password).catch(function(error) {
+        if (error.code === 'auth/wrong-password') {
+          Alert.alert("Wrong password");
+        } else {
+          Alert.alert(error.toString())
+        }
+      }).then( (user) => {
+        Alert.alert("Succesfully Registered")
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'Main'})]
+        });
+        this.props.navigation.dispatch(resetAction);
+        }
+      );
+>>>>>>> d12f2bcb60285ad944a73dd5bb4237b9d355e864
     }
 
     render() {
