@@ -59,6 +59,11 @@ export default class RegisterScreen extends Component {
 
 
                 });
+                firebaseApp.auth().onAuthStateChanged(function(user) {
+                  if (!user) {
+                    firebaseApp.auth().signInWithEmailAndPassword(email, password);
+                  }
+                });
       }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

@@ -48,7 +48,7 @@ export default class LoginScreen extends Component<{}> {
           if (!user) {
             firebaseApp.auth().signInWithEmailAndPassword(email, password);
           }
-        })
+        });
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main'})]
