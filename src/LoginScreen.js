@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -8,7 +6,8 @@ import {
   View,
   TextInput,
   Image,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Right, Body, Title } from 'native-base';
