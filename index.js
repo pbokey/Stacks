@@ -8,6 +8,7 @@ import RegisterScreen from './src/RegisterScreen';
 import ResetPasswordScreen from './src/ResetPasswordScreen';
 import MainScreen from './src/MainPage';
 
+
 const MainStack = StackNavigator({
     Main: { screen: MainScreen }
 }, {
