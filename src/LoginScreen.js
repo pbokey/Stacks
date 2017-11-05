@@ -36,8 +36,11 @@ export default class LoginScreen extends Component<{}> {
       return;
     }
     var { navigate } = this.props.navigation;
+    var navpointer = this.props.navigation;
     email = this.state.email.toLowerCase();
-    firebaseApp.auth().signInWithEmailAndPassword(email, this.state.password)
+    password = this.state.password;
+    var userResult;
+    firebaseApp.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         console.log(user.toString());
         debugger;
@@ -45,7 +48,22 @@ export default class LoginScreen extends Component<{}> {
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main'})]
         });
-        this.props.navigation.dispatch(resetAction);
+        navpointer.dispatch(resetAction);
+        var key = 'users/'+user.uid;
+        firebaseApp.database().ref(key).once('value').then(function(userData) {
+          if (userData.val() == undefined) {
+            Alert.alert("no user exists, delete your account and try again");
+          } else {
+            userResult = {
+              "name": userData.child("name"),
+              "payment": userData.child("payment"),
+              "groupID": userData.child("groupID"),
+            }
+            //Alert.alert(JSON.stringify(userResult));
+          }
+        }).catch(function(error) {
+          Alert.alert('error: ' + error.message);
+        });
         // navigate('Main')
       }).catch(function(error) {
           if (error.code === 'auth/wrong-password') {

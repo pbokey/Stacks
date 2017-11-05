@@ -19,7 +19,8 @@ export default class RegisterScreen extends Component {
     };
 
     register() {
-      var { navigate } = this.props.navigation;
+      //var { navigate } = this.props.navigation;
+      var navpointer = this.props.navigation;
       email = this.state.email.toLowerCase();
       password = this.state.password;
       firebaseApp.auth().createUserWithEmailAndPassword(email, password).then(function() {
@@ -28,7 +29,7 @@ export default class RegisterScreen extends Component {
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Main'})]
         });
-        navigate.dispatch(resetAction);
+        navpointer.dispatch(resetAction);
         firebaseApp.auth().signInWithEmailAndPassword(email , password).catch(function(error) {
                   var errorCode = error.code;
                   var errorMessage = error.message;
