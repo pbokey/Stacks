@@ -41,7 +41,6 @@ export default class RegisterScreen extends Component {
                 }).then(function() {
                     var user = firebaseApp.auth().currentUser;
                     if (user != null) {
-                      var uid = user.userID;
                       var data = {
                           "name": email.substring(0, email.indexOf('@')),
                           "payment": 0,
