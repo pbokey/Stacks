@@ -5,6 +5,7 @@ import firebaseApp from './src/firebase';
 import HomeScreen from './src/HomeScreen';
 import LoginScreen from './src/LoginScreen';
 import RegisterScreen from './src/RegisterScreen';
+import ResetPasswordScreen from './src/ResetPasswordScreen';
 import MainScreen from './src/MainPage';
 
 const MainStack = StackNavigator({
