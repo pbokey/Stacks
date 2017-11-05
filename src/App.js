@@ -19,7 +19,8 @@ import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import UserInfo from './UserInfo';
 import InfoEdit from './InfoEdit';
-
+import ResetPasswordScreen from './ResetPasswordScreen';
+import MainScreen from './MainPage';
 
 const App = StackNavigator({
   Home: { screen: HomeScreen },
@@ -27,4 +28,5 @@ const App = StackNavigator({
   Login: { screen: LoginScreen },
   UserInfo: {screen: UserInfo},
   InfoEdit: {screen: InfoEdit}
+  Main: { screen: MainScreen }
 });

@@ -7,14 +7,25 @@ import LoginScreen from './src/LoginScreen';
 import RegisterScreen from './src/RegisterScreen';
 import UserInfo from './src/UserInfo';
 import InfoEdit from './src/InfoEdit';
+import ResetPasswordScreen from './src/ResetPasswordScreen';
+import MainScreen from './src/MainPage';
 
 
-const App = StackNavigator({
+const MainStack = StackNavigator({
+    Main: { screen: MainScreen }
+}, {
+    headerMode: 'none'
+});
+
+const Root = StackNavigator({
   Home: { screen: HomeScreen },
   Register: { screen: RegisterScreen },
   Login: { screen: LoginScreen },
   UserInfo: {screen:UserInfo},
   InfoEdit: {screen: InfoEdit}
+  Main: { screen: MainScreen }
 });
 
-AppRegistry.registerComponent('Stacks', () => App);
+
+
+AppRegistry.registerComponent('Stacks', () => Root);
